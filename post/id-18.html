@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="当我们需要自己编写网站或对已有网站进行优化时，常常缺少参考标准。谷歌等浏览器内置的新功能 Lighthouse 可评测网页的性能并给出改进建议，本文介绍了此功能的使用方法。">
+		<title>谷歌 Lighthouse 工具使用方法 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>谷歌 Lighthouse 工具使用方法</h2>
+			<div id="post-sign">2021年7月21日 由 秋月夏茗</div>
+			<article>
+				<p>Lighthouse 是谷歌浏览器以及某些谷歌内核浏览器（如 Microsoft Edge）新增的一个功能，可全方位评测某一网页的渲染性能、用户体验、SEO 情况等。</p>
+				<p>使用 Lighthouse 前需要安装最新的谷歌浏览器或 Microsoft Edge。打开该浏览器，首先访问想要评测的页面，然后按 Ctrl+Shift+I 或 F12 调出开发者工具：</p>
+				<img src="/media/x3e6rzk8ur.png" alt="开发者工具">
+				<p>切换至最右侧的 Lighthouse 选项卡，在 Device 区域选择设备类型，接着点击 Generate report 开始评测：</p>
+				<img src="/media/yqhjoh670m.png" alt="开始评测">
+				<p>等待评测完成即可，需要几秒至十几秒不等的时间，如果前四项都是100分则会有浮夸的烟花动画：</p>
+				<img src="/media/r0y8wdfzi1.png" alt="评测报告">
+				<p>Lighthouse 的部分评测项目与谷歌的 PageSpeed Insights 相同，可详细展示页面加载用时和渲染过程：</p>
+				<img src="/media/aj280vphzu.png" alt="渲染过程">
+				<p>页面最下方提供了针对移动设备的优化建议（PWA 优化），它们有助于改善用户体验：</p>
+				<img src="/media/awk4qle60w.png" alt="其他建议">
+				<p>总而言之，Lighthouse 是一款优秀的页面性能评测工具，相比 PageSpeed Insights，它的使用情景更加广泛，提供的建议也更多，对于个人站点的优化十分实用。</p>
+			</article>
+		</main>
+	</body>
+</html>

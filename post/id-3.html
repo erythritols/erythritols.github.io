@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="a 标签是 HTML 中十分常用的标签，而 rel 是 a 标签中常见的属性。此文章旨在解释 rel 属性的用法及对搜索引擎抓取的影响，避免滥用 nofollow 导致不公平的友链。">
+		<title>HTML 中 a 标签 rel 属性介绍< - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>HTML 中 a 标签 rel 属性介绍</h2>
+			<div id="post-sign">2021年2月16日 由 秋月夏茗</div>
+			<article>
+				<p>HTML 中的 a 标签本身不需要过多解释了，它用于向网页添加超链接。那么下面解释一下在 a 标签中的常见的 rel 属性（如“rel="nofollow"”）有什么用：</p>
+				<p>rel 属性的定义是：a 标签的 rel 属性用于指定当前文档与被链接文档的关系。通常使用的“rel="nofollow"”，意思即是禁止爬虫通过此超链接爬取内容。众所周知，各种爬虫（比如丧心病狂的百度蜘蛛）会尽可能地搜罗到站点中的每个页面，这就需要寻找每个页面中的超链接并跟踪它们。然而这个过程是会导致一部分权重分散和流失的，有的超链接并不是我们想要让爬虫跟踪的，比如管理后台的入口。这就需要我们为这些超链接合理设置 nofollow。</p>
+				<p>然而，总会有一些不合理的事情发生，比如某些网站将外站的友情链接加上了 nofollow。先说说如果双方交换友链时单方加 nofollow 的后果：蜘蛛来到未加 nofollow 的网站时会跟踪到加了 nofollow 的网站并传递一部分权重过去，但来到加了 nofollow 的网站时会检测到友情链接的 nofollow 而不对其进行跟踪，这会导致未加 nofollow 的网站权重下降、加了的网站权重上升。所以，<strong>双方友链单方设置 nofollow 是不公平的</strong>。</p>
+				<p>值得注意的是，rel 标签仅仅是一种被普遍接受的标准，这不代表着 rel 标签能保证避免一切爬虫的跟踪，部分没有 rel 属性检测功能的爬虫程序仍然会跟踪设置了 nofollow 的超链接。所以如需更加可靠地避免爬虫访问某个页面，应使用 robots.txt 直接禁止某一页面或目录的访问。</p>
+			</article>
+		</main>
+	</body>
+</html>

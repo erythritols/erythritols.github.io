@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="静态资源文件数量比较多的境外站点容易因 HTTP 协议的并发限制而导致加载速度慢，本文以 Discuz! X3.4为例演示将网站静态资源分离至 Vercel 的具体流程。">
+		<title>使用 Vercel 加速网站静态文件 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="stylesheet" href="/css/code.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>使用 Vercel 加速网站静态文件</h2>
+			<div id="post-sign">2022年4月5日 由 秋月夏茗</div>
+			<article>
+				<p>博客已经咕咕咕好久了，大概是因为我最近在忙着学习<span class="black-cover">（其实是在忙着研究二次元和网站）</span>。</p>
+				<p>这几天遇到了一个问题：受限于我国奇妙的网站备案政策，有些论坛站点不得不托管在境外，而论坛需要加载的文件又比较多，对于以 Cloudflare 用户为首的拮据站长们不得不忍受大量资源文件加载的缓慢。针对这一问题，一种比较好的办法是做动静分离，也就是借用一个已备案的子域名，用国内 CDN 反代网站的静态文件（CSS、JavaScript、图片等），然后从这个子域名处加载这些文件。不过，如果你担心阿里云、腾讯云这些按流量计费的 CDN 被刷得一夜暴负，又不想用百度云加速的话，Vercel 是个不错的选择。</p>
+				<p>本文以 Discuz! X3.4做演示。目前国内用户会被 Vercel Anycast 到日本东京、新加坡等地的节点，速度比较理想，但不排除 Vercel 未来网络质量恶化的可能，而且加载新域名的资源需要一次 DNS 查询和三次 TCP（TLS 连接还要多一次）握手，容易导致渲染阻塞。因此，用境外的 Vercel 做动静分离时，不建议分离 CSS 和 JavaScript 文件。对于 Discuz，分离 static 目录下的文件即可。</p>
+				<img src="/media/7u5x2dllh1.png" alt="境内访问效果">
+				<h3>一、准备文件</h3>
+				<p>进入宝塔面板、FTP 等文件操作工具，将整个 static 目录压缩、下载，并在你的电脑上将压缩包解压。也可以尝试其他的批量下载文件的方法。未对 static 目录进行修改的话也可以直接使用原版文件。</p>
+				<h3>二、反代域名配置</h3>
+				<p>Vercel 有强大的反向代理能力，让 Vercel 直接反代源站也是一种选择；不过，也可以将静态文件托管到 GitHub，让 Vercel 从 GitHub 仓库获取文件，避免增加源站的压力。你需要一个 GitHub 账号<span class="black-cover">←废话✕1</span>，接着到 <a href="https://vercel.com/" target="_blank" rel="noopener">vercel.com</a> 连接你的 GitHub 账号并注册 Vercel 账号<span class="black-cover">←废话✕2</span>。</p>
+				<p>首先创建一个 GitHub 仓库，仓库名任取，仓库类型设为私有。接着，使用 Git 将刚刚下载的 static 目录下的全部文件推送到此仓库，最终的效果如下：</p>
+				<img src="/media/6w5h4qsbfq.png" alt="仓库最终效果">
+				<p>然后转到 Vercel 控制台，点击 New Project，关联 GitHub 源后导入刚才的仓库，并按提示进行部署。部署成功后，进入项目控制台，按下图绑定子域名。</p>
+				<img src="/media/s8hindf0hb.png" alt="添加域名">
+				<p>打开域名解析控制台，为 static.xxx.com 添加一条解析记录：</p>
+				<pre>CNAME static.xxx.com cname.vercel-dns.com</pre>
+				<p>这里使用 CNAME 而非 A 记录的原因是 Vercel 由于被滥用（之前76.76.21.21就是因此被和谐的，但 Vercel 持有的 IP 比较多，有能力应对这类问题）以及一些其他原因，IP 时有变动。接下来需要等待 Vercel 为该域名签发 SSL 证书。等到 Vercel 自定义域名处显示 Valid Configuration，配置即完成。</p>
+				<h3>三、修改配置</h3>
+				<p>第一处，打开网站 config 目录下的 config_global.php 文件，将</p>
+				<pre>$_config['output']['staticurl'] = 'static/';</pre>
+				<p>修改为</p>
+				<pre>$_config['output']['staticurl'] = 'https://static.xxx.com/';</pre>
+				<p>变量值末尾的斜杠不应省去。修改完成后保存文件。</p>
+				<p>第二处，打开管理中心，打开“模板”标签页，点击当前正在使用的模板的“编辑”链接，将“界面基础图片目录 {IMGDIR}”一项修改为：</p>
+				<pre>https://static.xxx.com/image/common</pre>
+				<p><strong>注意，末尾处不要加斜杠</strong>。将页面滚动到最下方，点击“提交”按钮。路径修改完成后到“工具”标签页更新缓存。四个项目最好都勾选。</p>
+				<img src="/media/v6qu3nfc1c.png" alt="选择全部缓存项目">
+				<h3>四、测试及其他注意事项</h3>
+				<p>访问你的站点，静态资源文件（如界面图片）将会从 static.xxx.com 加载。当页面需要加载的文件总数高于 HTTP 协议的并发限制时，动静分离的优势就比较明显了。当然，也可以在此基础上根据站点的实际情况加以调整，比如添加更多的子域名、变更仓库目录结构等。</p>
+				<p>值得注意的是，Vercel 免费计划限制每月100G的流量；且根据其过去的网络策略来看，目前的网络连接质量难以长期保持。另外，如果修改了 static 目录下的文件，需要重新推送到 GitHub。</p>
+			</article>
+		</main>
+	</body>
+</html>

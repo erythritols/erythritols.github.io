@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="在使用 PHP 作为后端设计一类有用户注册、登录功能的程序时常需存储密码，这里介绍了常见的通过 PHP 记录密码的方法，包括比较安全的方法和相对不安全的方法。">
+		<title>PHP 用户体系中存储密码的方法 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="stylesheet" href="/css/code.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>PHP 用户体系中存储密码的方法</h2>
+			<div id="post-sign">2021年3月12日 由 秋月夏茗</div>
+			<article>
+				<h3>直接存储法</h3>
+				<p>对，没错，顾名思义，就是将明文密码像用户名一样直接存储。这种方法的优点就是十分方便，需要处理和使用密码时很便捷，不用考虑太多。但其缺点也十分明显：如果数据库等密码存储位置遭到入侵，用户的密码会被暴露；同时，用户的密码可以被数据库管理员看到，这会给用户带来不爽之感。</p>
+				<h3>哈希加密法</h3>
+				<p>哈希加密法即使用 PHP 的 hash 函数对密码进行哈希加密，再存储加密后的密码。用法如：</p>
+				<pre>hash("sha256","123456")</pre>
+				<p>此方法非常安全，因为哈希算法属于理论上不可解密的压缩映射算法，所以即使数据库遭到入侵，用户密码也是不会泄露的。如果使用这种方法，校验密码时应该校验输入值的哈希与数据库值是否相等。</p>
+				<h3>PHP 加密函数法</h3>
+				<p>此方法与哈希加密法原理差别不大，只不过是使用 PHP 的 password_hash 函数而非 hash 函数加密密码，如：</p>
+				<pre>password_hash("123456",PASSWORD_DEFAULT)</pre>
+				<p>此方法的特点是生成的密码来自盐值（salt），生成的密码是非唯一的，可以一定程度上防止字典破解，比简单的哈希加密更加安全。不过，美中不足是单个密码所生成的哈希值并不相同，因此校验密码必须使用 password_verify 函数，降低了代码的可移植性。</p>
+			</article>
+		</main>
+	</body>
+</html>

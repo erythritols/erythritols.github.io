@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="最近国际知名网络服务商 Cloudflare 推出了一项新功能——Pages，具备较完善的部署控制功能，那么其访问速度和线路质量究竟怎么样？此文章为你揭晓答案。">
+		<title>Cloudflare Pages 体验评价 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>Cloudflare Pages 体验评价</h2>
+			<div id="post-sign">2021年5月4日 由 秋月夏茗</div>
+			<article>
+				<p id="obsol-warn">
+					<img src="/img/warn.png">
+					<span id="warn-content">本文长时间未更新，部分内容可能已过时。</span>
+				</p>
+				<p>Pages 服务，即静态页面托管服务，是用于托管静态网页的一种便捷途径，最出名的有 GitHub Pages、Vercel Pages、Gitee Pages 等。最近，Cloudflare 也推出了 Pages 服务，下面是关于此服务的体验评价。</p>
+				<p>若要使用 Cloudflare Pages，首先需注册 Cloudflare，接着在控制台主页点击进入“网页”链接即可。</p>
+				<img src="/media/wd3op092xt.png" alt="控制台链接位置">
+				<p>Cloudflare Pages 不提供文件托管，目前只支持连接 GitHub 仓库获取网页源文件。</p>
+				<img src="/media/gq68dr79gc.png" alt="从GitHub创建">
+				<p>部署过程和 Vercel 几乎一致，而且这个浮夸的首次部署成功效果也如此相仿。</p>
+				<img src="/media/eeix09q9cn.png" alt="部署成功界面">
+				<p>部署控制系统还是非常完善的，每次部署都有单独的链接，方便开发使用。</p>
+				<img src="/media/90hv5y29cg.png" alt="部署控制系统">
+				<p>Cloudflare Pages 成功部署后会分配一个默认二级域名，也支持自行绑定域名。</p>
+				<img src="/media/fig2z660el.png" alt="自定义域">
+				<p>将自有域名输入至 Cloudflare 并自行添加 CNAME 记录即可，不强制通过 NS 接入。</p>
+				<img src="/media/xz0l1zp4me.png" alt="配置解析">
+				<p>添加自定义域名后需等待 Cloudflare 进行解析添加校验并签发 SSL 证书，否则自定义域名无法使用。</p>
+				<img src="/media/u6ormxc5cz.png" alt="等待校验">
+				<p>测试时分配的两个 IP 分别为北美<strong>104.21.16.226</strong>和欧洲<strong>172.67.216.70</strong>。境内直接访问时，就要在并不普遍适合三大运营商的洛杉矶和玄学的欧洲 Level3 之间做命运大抽奖。</p>
+				<img src="/media/yzu105mzl2.png" alt="路由跟踪效果">
+				<p>站长之家测得全球 Ping 延时比以 NS 方式接入的 Cloudflare CDN 稍高。</p>
+				<img src="/media/cc0zv6zlmn.png" alt="全球延时">
+				<p>站长之家测得的境内访问总时间（排除域名解析时间），效果不理想。</p>
+				<img src="/media/7w6688a24u.png" alt="境内访问时间">
+				<p>综上，Cloudflare Pages 具备基础的页面部署、版本分离、自定义域名功能，但默认分配的线路质量一般，不适合中国境内使用（Cloudflare 只通过 DNS 校验域名是否绑定，因此无法自选节点或在用户与 Cloudflare Pages 之间再套 CDN 等），仍需等待进一步完善。</p>
+			</article>
+		</main>
+	</body>
+</html>

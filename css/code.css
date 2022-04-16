@@ -1,0 +1,22 @@
+@font-face {
+	font-family: camingocode;
+	src: url('/font/camingo.ttf');
+	font-display: swap;
+}
+pre {
+	line-height: 150%;
+	padding: 8px 15px;
+	background: #f7f0d7;
+	font-family: camingocode;
+	font-size: 15px;
+	color: #42ab62;
+	white-space: pre-wrap;
+	border-radius: 8px;
+	tab-size: 4;
+}
+@media (prefers-color-scheme: dark) {
+	pre {
+		background: #646464;
+		color: #4efdff;
+	}
+}

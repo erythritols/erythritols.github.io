@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="在探索学习具有网络功能的桌面编程时，我接触了一些与网络配置和在线数据传输有关的 Windows 命令，此文章列举了这些命令并对其功能和用法进行简要介绍。">
+		<title>Windows 下与网络相关的命令 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>Windows 下与网络相关的命令</h2>
+			<div id="post-sign">2021年3月7日 由 秋月夏茗</div>
+			<article>
+				<h3>ping</h3>
+				<p>Ping，即因特网包探索器，是一种十分常用的网络工具，主要用于测试用户端与服务器之间能否正常连接与连接延时的长短。使用时，需在其后加一个域名或 IP，然后执行命令，即可获得相应结果。</p>
+				<h3>curl</h3>
+				<p>curl 是一款世界知名的跨平台全能网络工具，具有 FTP 传输、文件下载、指令发送等大量功能，广泛被各种网络相关程序调用。此命令非常复杂，但兼容性和稳定性都很高。</p>
+				<h3>ssh</h3>
+				<p>SSH 是一种用于远程登录和远程文件传输的安全协议，通常用于连接网络服务器。使用时需按“ssh 用户名@地址”来启动连接。</p>
+				<h3>ftp</h3>
+				<p>FTP 这种协议大概不用多解释了，而 Windows 内置的 FTP 命令可以连接 FTP 服务器和传输文件，被各种 FTP 相关软件广泛地使用。</p>
+				<h3>bitsadmin</h3>
+				<p>BITSAdmin 是 BITS（后台智能传送服务）管理工具，是微软开发的一款文件传输工具，内置在 Windows 系统中，Windows 更新、Microsoft Store 都依赖于 BITS。BITSAdmin 既可用来下载文件，又可用来查看和管理当前的 BITS 任务。</p>
+				<h3>tracert</h3>
+				<p>Tracert 被称为路由跟踪工具，它可检测出从用户端到服务器之间的网络传输路径和到达每个节点的延时，对于就近地域优化调试、某个网站无法连接的故障诊断十分实用。</p>
+				<h3>nslookup</h3>
+				<p>NSLookup 是一款 DNS 查询工具，它可以很方便地查询到某个域名指向的 IP 或另一个 CNAME 域名。使用时直接在其后加域名即可。</p>
+				<h3>ipconfig</h3>
+				<p>IPConfig 是 Windows 中的一款命令行 TCP/IP 配置工具，常用功能是适配器信息显示和刷新 DNS 缓存。注：DNS 缓存即 Windows 对 DNS 解析结果的缓存，使用 -flushdns 参数可对其进行强制刷新，可使新的 DNS 记录迅速在本机上生效。</p>
+				<h3>netsh</h3>
+				<p>相比于 IPConfig，Netsh 的适用范围更加广泛，它是 Windows 下专门用于修改网络配置的工具。从显示网络配置，到修改 IP、DNS，再到重置网络设置（netsh winsock reset），甚至是配置防火墙规则，都可以用 Netsh 实现。</p>
+				<h3>netstat</h3>
+				<p>NetStat，用于监视本机当前的 TCP/UDP 协议状态。使用 -an 参数可列举它们，将分别输出协议、本地地址、外部地址和状态。</p>
+				<h3>arp</h3>
+				<p>Arp，即地址解析协议，用于在本机上将 IP 地址解析到物理设备。此命令不是很常用，键入 -a 参数可显示所有 Arp 缓存。</p>
+			</article>
+		</main>
+	</body>
+</html>

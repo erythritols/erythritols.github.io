@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="近期我对本站的域名解析策略进行了调整，在选择阿里云解析的版本时比对了不同版本之间的差别并综合各方面因素评判了它们的性价比，在这里简要梳理出来。">
+		<title>阿里云解析各版本体验评价 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>阿里云解析各版本体验评价</h2>
+			<div id="post-sign">2021年3月27日 由 秋月夏茗</div>
+			<article>
+				<p id="obsol-warn">
+					<img src="/img/warn.png">
+					<span id="warn-content">本文长时间未更新，部分内容可能已过时。</span>
+				</p>
+				<p>阿里云解析免费版分配的 DNS 服务器为 dns*.hichina.com（非阿里云域名为 ns1.alidns.com / ns2.alidns.com），全球平均 Ping 延时约为54.3毫秒。免费版没有境外节点，境外用户也会解析至境内的北京/上海阿里云节点：</p>
+				<img src="/media/4s3f2iw3jo.png" alt="免费版解析延时">
+				<p>免费版只提供电信/联通/移动/教育网/境外/搜索引擎线路，不能细分，功能和稳定性表现都比较差，不过可以满足基本的使用需求。</p>
+				<p>下面来重点介绍和比对一下阿里云解析的付费版本。</p>
+				<h3>个人版</h3>
+				<p>本博客目前正在使用此版本，其 DNS 服务器为 vip1.alidns.com / vip2.alidns.com，价格为48元每年（不计优惠）。官方介绍如下：</p>
+				<img src="/media/d3567cehau.png" alt="个人版官方介绍">
+				<p>个人版的节点质量十分感人，全球平均 Ping 延时约为59.2毫秒，不如免费版；个人版的解析方式也十分奇葩，境内部分地区会解析至日本、美国等地，总之给人一种胡乱解析的感觉：</p>
+				<img src="/media/22r2gduj2n.png" alt="个人版解析延时">
+				<p>个人版相比于免费版，主要体现在限制的减少和功能的扩充，节点数量有所增加，节点质量与稳定性提升不大，不过提供了 DNSSEC 和解析量统计功能，而且价格比较低廉。</p>
+				<h3>企业标准版</h3>
+				<p>此版本分配的 DNS 服务器为 vip3.alidns.com / vip4.alidns.com，价格为198元每年（不计优惠）。官方介绍如下：</p>
+				<img src="/media/u63qm9iy0i.png" alt="企业标准版官方介绍">
+				<p>企业标准版的节点质量稍好于个人版，全球平均 Ping 延时约为48.1毫秒。境内解析不会抽风，会分配上海/杭州/广州等地的节点；境外统一为新加坡的阿里云节点或美国弗吉尼亚节点（极罕见）：</p>
+				<img src="/media/krtw2dg7c3.png" alt="企业标准版解析延时">
+				<p>企业标准版价格不算便宜，节点质量相比个人版有提升，可进行分地域解析（境内精确到省，境外精确到洲），并且提供最小一分钟的 TTL 和更优的服务。</p>
+				<h3>企业旗舰版</h3>
+				<p>此版本分配的 DNS 服务器为vip5.alidns.com / vip6.alidns.com，价格为568元每年（不计优惠）。官方介绍如下：</p>
+				<img src="/media/shq7g7coqz.png" alt="企业旗舰版官方介绍">
+				<p>企业旗舰版的节点质量比较好，全球平均 Ping 延时约为39.6毫秒。境内解析策略与企业标准版相似，境外节点更加多样（通常是香港的阿里云节点），表现比企业标准版好：</p>
+				<img src="/media/bf4w17x2am.png" alt="企业旗舰版解析延时">
+				<p>企业旗舰版价格非常高昂，但可靠性非常强，功能也相对强大，同时可以自定义解析线路，重要网站或有特殊需求可以考虑使用。</p>
+				<p>总而言之，相比于其他 DNS 服务商，阿里云解析的节点质量相对比较高，付费产品价格相比同级产品要低，但功能上比同价格产品要少。目前阿里云解析全系列产品有年购八五折优惠，还是很值得体验一下的。</p>
+			</article>
+		</main>
+	</body>
+</html>

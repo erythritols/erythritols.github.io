@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1">
+		<meta name="description" content="本静态博客全部由我原创，在这里分享一些用于个人博客的前端设计思路和技巧，并讲解一下本博客大致的页面编排方法、本人曾遇到的一些小问题的解决方案等。">
+		<title>原创静态博客的一些设计思路 - 秋月夏茗的笔记本</title>
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/post.css">
+		<link rel="stylesheet" href="/css/code.css">
+		<link rel="icon" href="/img/favicon.png">
+	</head>
+	<body>
+		<header>
+			<img src="/img/avatar.png" alt="站点头像">
+			<h1>秋月夏茗的笔记本</h1>
+			<div>千江有水千江月 万里无云万里天</div>
+		</header>
+		<nav>
+			<a href="/">首页</a>
+			<a href="/arch/">存档</a>
+			<a href="/about/">关于</a>
+			<a href="/link/">友链</a>
+		</nav>
+		<main>
+			<h2>原创静态博客的一些设计思路</h2>
+			<div id="post-sign">2021年5月9日 由 秋月夏茗</div>
+			<article>
+				<p id="obsol-warn">
+					<img src="/img/warn.png">
+					<span id="warn-content">本文长时间未更新，部分内容可能已过时。</span>
+				</p>
+				<p>目前大多数用户使用的是较新的谷歌、火狐等浏览器，旧版 IE 用户已经非常少，所以最好使用 HTML5 和 CSS3 标准，以便支持一些新样式并提升渲染速度。首先需在代码第一行添加 HTML5 声明：</p>
+				<pre>&lt;!DOCTYPE html&gt;</pre>
+				<p>头部中，首先添加 charset（页面编码）元信息，避免乱码：</p>
+				<pre>&lt;meta charset="utf-8"&gt;</pre>
+				<p>本博客进行了移动端适配，移动端界面结构和电脑端一致，只是进行了缩放，所以需要加 viewport（视口）元信息，这样可以避免移动端出现横向滚动条：</p>
+				<pre>&lt;meta name="viewport" content="initial-scale=1"&gt;</pre>
+				<p>description（网站描述）元信息有利于搜索引擎了解网站内容，长度大约70字：</p>
+				<pre>&lt;meta name="description" content="一个旨在研究前端开发、记录日常感受、分享技术经验、讲解网络知识的博客，在这里走进编程与互联网的殿堂，探访一名中学生的内心世界，分享生活中的点滴快乐。"&gt;</pre>
+				<p>某些不需要搜索引擎收录的页面（如404页面）可添加 robots（自动程序）元信息，拒绝爬虫索引和跟踪：</p>
+				<pre>&lt;meta name="robots" content="none"&gt;</pre>
+				<p>本博客的 CSS 从外部引入，分全局 CSS（所有页面均用到的 CSS）和局部 CSS（针对特定页面使用的 CSS）两类：</p>
+				<pre>&lt;link rel="stylesheet" href="/css/main.css"&gt;&#10;&lt;link rel="stylesheet" href="/css/index.css"&gt;</pre>
+				<p>头部的末尾处使用 link 标签从外部加载网站图标。本站不兼容 IE 浏览器，所以 rel 属性值填 icon 即可：</p>
+				<pre>&lt;link rel="icon" href="/img/favicon.png"&gt;</pre>
+				<p>本博客使用单栏式布局，整体为居中对齐，页面从上到下分别为页头、导航栏、主体三部分，分别使用 HTML5 的 header、nav、main 标签，省去了分配 CSS 类的麻烦。</p>
+				<p>为电脑端设置最大界面宽度，并通过外边距居中显示：</p>
+				<pre>body {&#10;&#9;max-width: 900px;&#10;&#9;margin: 0 auto;&#10;}</pre>
+				<p>将 body 标签下属的第一级元素左右外边距都设置为50像素，使移动端页面两侧留有一定空白，更美观：</p>
+				<pre>header {&#10;&#9;margin: 10px 50px;&#10;}&#10;main {&#10;&#9;margin: 15px 50px;&#10;}</pre>
+				<p>首页的时间线是一个 article 标签，其中存在多组 time 标签（时间标记）和 div 标签（事件标记）：</p>
+				<pre>&lt;article&gt;&#10;&#9;&lt;time&gt;2021年8月5日&lt;/time&gt;&#10;&#9;&lt;div&gt;启用 HTML 和 CSS 源代码压缩，减小文件体积&lt;/div&gt;&#10;&lt;/article&gt;</pre>
+				<p>结合元素选择器、子元素选择器和后代选择器设置时间线样式，使用 list-item 在时间标记左侧添加圆点：</p>
+				<pre>article&gt;div {&#10;&#9;margin: 5px 0 10px;&#10;}&#10;article a {&#10;&#9;color: #a08;&#10;}&#10;time {&#10;&#9;display: list-item;&#10;}</pre>
+				<p>友情链接页中，每个网站使用一个 section 标签，其中包含网站名、链接三级标题和小字体网站介绍：</p>
+				<pre>&lt;section&gt;&#10;&#9;&lt;a href="https://www.puresys.net/" target="_blank" rel="noopener"&gt;&lt;h3&gt;Puresys&lt;/h3&gt;&lt;/a&gt;&#10;&#9;&lt;p&gt;纯净系统 软件下载&lt;/p&gt;&#10;&lt;/section&gt;</pre>
+				<p>友情链接页的主体部分为弹性盒子布局，应居中显示弹性盒子并允许换行：</p>
+				<pre>article {&#10;&#9;display: flex;&#10;&#9;flex-wrap: wrap;&#10;&#9;justify-content: center;&#10;}</pre>
+				<p>文章内容页的发布时间与作者标记在整个页面中是唯一的，应使用 ID 选择器而非效率较低的类选择器：</p>
+				<pre>&lt;div id="intro"&gt;2021年1月28日 由 秋月夏茗&lt;/div&gt;</pre>
+				<p>为此 ID 定义样式，使用相对大小值代替绝对大小值设置其字体大小：</p>
+				<pre>#intro {&#10;&#9;font-size: small;&#10;}</pre>
+				<p>自定义文章里 strong（粗体）标签的颜色，突出强调相应文本并使页面效果更加多彩：</p>
+				<pre>strong {&#10;&#9;color: #d10;&#10;}</pre>
+				<p>文章中的链接通过 a 标签实现，需添加 target 属性以在新页面打开，外部链接均应使用 noopener 以保证安全：</p>
+				<pre>&lt;a href="//wpa.qq.com/msgrd?uin=2195794117" target="_blank" rel="noopener"&gt;</pre>
+				<p>代码块通过 pre 标签实现，可以保留代码的制表符。需要设置制表符宽度、行高、强制换行等：</p>
+				<pre>pre {&#10;&#9;line-height: 150%;&#10;&#9;white-space: pre-wrap;&#10;&#9;tab-size: 4;&#10;}</pre>
+			</article>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+h2 {
+	margin: 15px 0 10px;
+}
+#post-sign {
+	font-size: small;
+}
+article {
+	line-height: 1.7;
+	text-align: left;
+}
+#obsol-warn {
+	display: flex;
+	padding: 10px 16px;
+	background: #ffe7d9;
+	border-radius: 8px;
+}
+#warn-content {
+	align-self: center;
+	margin-left: 16px;
+}
+article a {
+	color: #e300a7;
+	text-decoration: underline;
+}
+strong {
+	color: #da0000;
+}
+.story-chara {
+	color: #00bcc2;
+}
+.story-charb {
+	color: #dc6300;
+}
+.black-cover {
+	background: #323232;
+	transition: background .13s;
+}
+.black-cover:hover {
+	background: #fffaf0;
+}
+@media (prefers-color-scheme: dark) {
+	#obsol-warn {
+		background: #750000;
+	}
+	article a {
+		color: #ff00c4;
+	}
+	strong {
+		color: #ff0000;
+	}
+	.story-chara {
+		color: #00edf9;
+	}
+	.story-charb {
+		color: #00f818;
+	}
+	.black-cover {
+		background: #e6e6e6;
+	}
+	.black-cover:hover {
+		background: #0f0f0f;
+	}
+}
